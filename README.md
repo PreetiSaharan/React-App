@@ -68,7 +68,7 @@ A button clears all items from the inventory list and adds them to the deleted i
 #### Persistence: 
 Both the inventoryList and deletedItemsList are stored in localStorage whenever they change, ensuring that the data persists across page refreshes. The component also handles rendering the active and deleted items based on the "View Deleted Items" toggle.
 
-## ------------------------------- TESTS (/components/_tests_/Lists.test.js) -------
+## ------------------------------- TESTS (/components/__tests__/Lists.test.js) -------
 ### 1. Renders Inventory List
 TEST NAME: renders inventory list
 PURPOSE: Verifies that the "Inventory List" heading is rendered on the page when the app is loaded.
