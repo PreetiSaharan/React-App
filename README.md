@@ -7,8 +7,8 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 ### `npm test`
 If face issues run below commands
-# npm test -- --clearCache
-# npm test -- --watchAll
+#### npm test -- --clearCache
+#### npm test -- --watchAll
 
 ### `npm run build`
 Builds the app for production to the `build` folder-bundles React in production mode and optimizes the build for the best performance.
