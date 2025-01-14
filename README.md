@@ -6,7 +6,9 @@ Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 ### `npm test`
-Launches the test runner in the interactive watch mode.
+If face issues run below commands
+# npm test -- --clearCache
+# npm test -- --watchAll
 
 ### `npm run build`
 Builds the app for production to the `build` folder-bundles React in production mode and optimizes the build for the best performance.
@@ -66,7 +68,7 @@ A button clears all items from the inventory list and adds them to the deleted i
 #### Persistence: 
 Both the inventoryList and deletedItemsList are stored in localStorage whenever they change, ensuring that the data persists across page refreshes. The component also handles rendering the active and deleted items based on the "View Deleted Items" toggle.
 
-## ------------------------------- TESTS --------------------------------------------
+## ------------------------------- TESTS (/components/_tests_/Lists.test.js) -------
 ### 1. Renders Inventory List
 TEST NAME: renders inventory list
 PURPOSE: Verifies that the "Inventory List" heading is rendered on the page when the app is loaded.
