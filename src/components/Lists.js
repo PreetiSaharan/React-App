@@ -1,7 +1,8 @@
+
 import React, { useRef, useState, useEffect } from "react";
 import { Card, CardBody, CardHeader, Table } from "reactstrap";
 import { NavLink } from "react-router-dom";
-import { FaUndoAlt } from "react-icons/fa"; // Refresh icon
+import { FaUndoAlt, FaCaretUp, FaCaretDown } from "react-icons/fa"; // Refresh icon
 import { useListContext } from "../context/useListContext";
 
 const Lists = () => {
@@ -97,6 +98,16 @@ const Lists = () => {
     localStorage.setItem("deletedItemsList", JSON.stringify(updatedDeletedItemsList));
   };
 
+  const handleQuantityChange = (id, change) => {
+    setList(
+      list.map((item) =>
+        item.id === id
+          ? { ...item, quantity: Math.max(1, item.quantity + change) }
+          : item
+      )
+    );
+  };
+
   // Render items (active or deleted)
   const renderItems = (items) => {
     if (items.length === 0) {
@@ -118,12 +129,19 @@ const Lists = () => {
           <th scope="row">{item.id}</th>
           <td>{item.name}</td>
           <td>
-            <input
-              type="number"
-              value={item.quantity}
-              disabled
-              className="form-control input-quantity"
-            />
+            <div className="d-flex align-items-center">
+              <span>Quantity: {item.quantity}</span>
+              <div className="d-flex flex-column">
+                <FaCaretUp
+                  onClick={() => handleQuantityChange(item.id, 1)}
+                  style={{ cursor: "pointer", marginLeft: "5px" }}
+                />
+                <FaCaretDown
+                  onClick={() => handleQuantityChange(item.id, -1)}
+                  style={{ cursor: "pointer", marginLeft: "5px" }}
+                />
+                </div>
+            </div>
           </td>
           <td>
             {viewDeletedItems && isDeleted ? (
@@ -158,48 +176,44 @@ const Lists = () => {
         <Card className="w-50">
           {/* Add Item Form */}
           <form onSubmit={addItemFunc}>
-            <div className="d-flex justify-content-between align-items-center mx-3 mt-3 text-start">
-              <div>
-                <label htmlFor="itemName">Item Name*</label>
-                <input
-                  ref={itemInputRef}
-                  id="itemName"
-                  name="itemName"
-                  type="text"
-                  className="form-control input-itemName"
-                />
-              </div>
-              <div>
-                <label htmlFor="quantity" >Quantity*</label>
-                <div className="d-flex flex-row">
+            <div className="mx-3 text-start">
+              <div className="d-flex justify-content-between align-items-center mt-3">
+                <div>
+                  <label htmlFor="itemName" className="fw-bold">Item Name*</label>
                   <input
-                    ref={quantityInputRef}
-                    name="quantity"
-                    id="quantity"
-                    type="number"
-                    className="form-control input-quantity"
-                    min="1"
+                    ref={itemInputRef}
+                    id="itemName"
+                    name="itemName"
+                    type="text"
+                    className="form-control input-itemName"
                   />
-                  <button type="submit" className="btn btn-primary">
-                    Add
-                  </button>
+                </div>
+                <div>
+                  <label htmlFor="quantity" className="fw-bold">Quantity*</label>
+                  <div className="d-flex flex-row">
+                    <input
+                      ref={quantityInputRef}
+                      name="quantity"
+                      id="quantity"
+                      type="number"
+                      className="form-control input-quantity"
+                      min="1"
+                    />
+                    <button type="submit" className="btn btn-primary">
+                      Add
+                    </button>
+                  </div>
                 </div>
               </div>
+              <p className="input-comment">To get started, add 1 or more items</p>
             </div>
           </form>
 
           {/* Items Table */}
-          <CardHeader className="ml-3 mr-3">Inventory List</CardHeader>
+          <CardHeader className="ml-3 mr-3 text-start fw-bold">Inventory List</CardHeader>
           <CardBody>
             <Table>
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Item Name</th>
-                  <th>Quantity</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
+              
               <tbody>
                 {renderItems(combinedItems, false)}
               </tbody>

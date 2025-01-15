@@ -107,7 +107,7 @@ test("clears list", async () => {
 
   // Assert no items are present in the list
   await waitFor(() =>
-    expect(screen.queryAllByRole("row")).toHaveLength(2) // 2 row remains - 1st- header row & 2nd- No items message showing row
+    expect(screen.queryAllByRole("row")).toHaveLength(1) // 1 row remains - No items message showing row
   );
 });
 

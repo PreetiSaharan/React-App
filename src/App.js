@@ -1,4 +1,5 @@
 import "./App.css";
+import "./Lists.css";
 import { Lists, MyNav, Home } from "./components";
 import { Routes, Route } from "react-router-dom";
 import { ListProvider } from "./context/useListContext";
